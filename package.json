@@ -1,6 +1,6 @@
 {
   "name": "mandrill-send-template",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple wrapper around mandrill's send-template.json API call.  Makes the interface a bit nicer.",
   "main": "index.js",
   "scripts": {
