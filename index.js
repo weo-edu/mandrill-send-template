@@ -12,7 +12,7 @@ module.exports = function(apiKey) {
       template_content: [],
       async: false,
       message: {
-        to: translateTo(to),
+        to: translateTo(opts.to),
         merge_language: 'handlebars' || opts.merge_language,
         global_merge_vars: translateParams(opts.params),
         merge_vars: translateUserParams(opts.userParams),
@@ -27,7 +27,6 @@ module.exports = function(apiKey) {
 var sendTemplateUrl = 'https://mandrillapp.com/api/1.0/messages/send-template.json'
 
 function sendTemplate(params, cb) {
-  params.key = config.mandrillApiKey
   request
     .post(sendTemplateUrl)
     .send(params)
@@ -45,7 +44,7 @@ function translateTo(to) {
 }
 
 function translateParams(params) {
-  return Object.keys(params).map(function(key) {
+  return params && Object.keys(params).map(function(key) {
     return {
       name: key,
       content: params[key]
@@ -54,7 +53,7 @@ function translateParams(params) {
 }
 
 function translateUserParams(userParams) {
-  return Object.keys(userParams).map(function(key) {
+  return userParams && Object.keys(userParams).map(function(key) {
     return {
       rcpt: key,
       vars: translateParams(userParams[key])
